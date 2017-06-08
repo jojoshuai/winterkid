@@ -4,27 +4,56 @@
  */
 class Controller
 {
-    protected $_controller;
-    protected $_action;
-    protected $_view;
+    private $_view;
 
     // 构造函数，初始化属性，并实例化对应模型
-    function __construct($controller, $action)
+    function __construct()
+    {}
+
+    
+    public function view()
     {
-        $this->_controller = $controller;
-        $this->_action = $action;
-        $this->_view = new View($controller, $action);
+        // controllername
+        if (is_null($this->_view)) {
+            $this->_view = new View();
+        }
+        return $this->_view;
     }
 
-    // 分配变量
-    function assign($name, $value)
+    public function render()
     {
-        $this->_view->assign($name, $value);
+        $pathInfo = Core::getPathInfo();
+        $controllerName = $pathInfo['controller'];
+        $actionName = $pathInfo['action'];
+        $viewPath = VIEW_PATH . DIRECTORY_SEPARATOR . $controllerName . DIRECTORY_SEPARATOR . $actionName . '.php';
+        $this->view->render($viewPath);
     }
 
-    // 渲染视图
-    function __destruct()
+    // 重定向
+    public function redirect($url)
     {
-        $this->_view->render();
+        header("Location:$url", true, 302);
+    }
+
+    // 直接输出
+    public function export($data)
+    {
+        //ob_start();
+        echo json_encode($data);
+        ob_flush();
+    }
+
+    public function __get($name)
+    {
+        $value = null;
+        if ($name == 'view') {
+            $value = $this->view();
+        }
+        return $value;
+    }
+
+    public function __call($method, $args)
+    {
+        // 找不到方法就报错误日志
     }
 }
