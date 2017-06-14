@@ -4,6 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X_UA_Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="HTML, CSS, XML, XHTML, JavaScript">
+        <meta name="description" content="winterkid">
+        <meta name="author" content="winterkid">
         <title>index</title>
 
         <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -22,40 +25,19 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">主页</a></li>
-                        <li><a href="#article">文章</a></li>
-                        <li><a href="#picture">图片墙</a></li>
-                        <li><a href="#message">留言墙</a></li>
-                        <li><a href="#about">关于我</a></li>
+                        <li class="active"><a href="/">主页</a></li>
+                        <li><a href="/article">文章</a></li>
+                        <li><a href="/picture">图片墙</a></li>
+                        <li><a href="/message">留言墙</a></li>
+                        <li><a href="/me">关于我</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
         <div class="container" style="color: #fff; text-align: center; box-shadow: inset 0 0 100px rgba(0,0,0,.5) text-align: center">
-
-            <div class="site-wrapper-inner">
-
-                <div class="cover-container">
-
-                    <div class="inner cover">
-                        <h1 class="cover-heading">Cover your page.</h1>
-                        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-                        <p class="lead">
-                            <a href="#" class="btn btn-lg btn-default">Learn more</a>
-                        </p>
-                    </div>
-
-                    <div class="mastfoot">
-                        <div class="inner">
-                            <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
+            your ip is : <?php echo $this->ip ?> <br>
+            <!--your city is : --><?php //echo $this->city ?><!-- <br>-->
         </div>
 
         <!-- Bootstrap core JavaScript
