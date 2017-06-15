@@ -12,9 +12,9 @@ class MessageModel extends Model
     public function getAll()
     {
         $queryString = 'select * from message';
-        $stmt = $this->dbHandle->prepare($queryString);
-        $stmt->execute();
-        $rows = $stmt->fetchAll();
+        $connection = $this->connection->prepare($queryString);
+        $connection->execute();
+        $rows = $connection->fetchAll();
         $messageList = [];
         foreach ($rows as $row) {
             $id = $row['id'];
@@ -26,5 +26,28 @@ class MessageModel extends Model
             $messageList[] = $message;
         }
         return $messageList;
+    }
+    
+    public function create($content, $userId=404, $userName='noname')
+    {
+        $queryString = "insert into message(userId, userName, content) values({$userId}, {$userName}, {$content})";
+        $connection = $this->connection;
+        $connection->beginTransaction();
+        $connection->exec($queryString);
+        $res = $connection->commit();
+        return $res;
+    }
+
+    public function createMulti($messageInfoList)
+    {
+        $connection = $this->connection;
+        $stmt = $connection->prepare("insert into message(userId, userName, content) values(:userId, :userName, :content)");
+        foreach ($messageInfoList as $messageInfo) {
+            $stmt->bindParam(':useId', $messageInfo['userId']);
+            $stmt->bindParam(':userName', $messageInfo['userName']);
+            $stmt->bindParam(':content', $messageInfo['content']);
+            $res = $stmt->execute();
+        }
+        return true;
     }
 }

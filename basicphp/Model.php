@@ -4,7 +4,7 @@ class Model
 {
     protected $_table;
 
-    protected $dbHandle = null;
+    protected $connection = null;
 
     function __construct()
     {
@@ -19,22 +19,22 @@ class Model
     // 连接数据库
     private function connect($host, $port, $charset, $username, $passwd, $dbname)
     {
-        if (is_null($this->dbHandle)) {
+        if (is_null($this->connection)) {
             try {
                 //$dsn = "mysql:host=$host;port=$port;dbname=$dbname";
                 //$dbHandle = new PDO($dsn, $username, $passwd);
                 //$this->connection = $dbHandle;
-                $dbh = new PDO('mysql:host=localhost;dbname=winterkid;charset=utf8', 'root', '123456');
-                //$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                //$dbh->exec('set names utf8');
-                $this->dbHandle = $dbh;
+
+                $connection = new PDO('mysql:host=localhost;dbname=winterkid;charset=utf8', 'root', '123456');
+
+                $this->connection = $connection;
             } catch (PDOException $e) {
                 exit('error_message: ' . $e->getMessage());
             }
         }
     }
 
-    // 未来用于crm
+    // 未来用于orm
     private function creatObject(){}
 
     //region 通用数据库操作

@@ -2,6 +2,17 @@
 
 class MessageObject extends Object
 {
+    /*
+         CREATE TABLE `message` (
+        `id` int(8) NOT NULL AUTO_INCREMENT,
+        `userId` int(8) NOT NULL,
+        `userName` varchar(32) NOT NULL,
+        `content` text,
+        `publishDate` datetime DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+     */
+
     private $id;
     private $userId;
     private $userName;
@@ -15,6 +26,21 @@ class MessageObject extends Object
         $this->userName = $userName;
         $this->content = $content;
         $this->publishDate = $publishDate;
+    }
+
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function getPublishDate()
+    {
+        return $this->publishDate;
     }
 
     public function jsonSerialize()
